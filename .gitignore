@@ -1,0 +1,5 @@
+# Project stuff
+.idea
+
+# Virtualenv
+blogpy_venv
