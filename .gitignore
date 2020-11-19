@@ -9,3 +9,6 @@ db.sqlite3
 
 # Migrations
 blog/migrations
+
+# env files
+.env

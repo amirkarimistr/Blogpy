@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  # The below line we define the name of container
+  blogpy_postgresql:
+    # The below line we define where do we want to get the image for our container
+    image: postgres:10
+    # The below line we define the name of container that we see in command line
+    container_name: blogpy_postgresql
+    # For saving the data that are generated in postgres we could use volumes
+    volumes:
+    # For defining multiple volumes we could use dash(-)
+    # The data in our postgres will be saved in /var/lib/postgresql/data we could change the directory
+      - blogpy_postgresql:/var/lib/postgresql/data
+    restart: always
+    env_file: .env
+    # Define the ports that we want ti run our database on it
+    ports:
+      - "5432:5432"
+    # For connect to containers our more we could define a network
+    networks:
+      - blogpy_network
+
+# Define our volumes that we create in above lines
+volumes:
+  blogpy_postgresql:
+    external: true
+# Define our networks that we create in above lines
+networks:
+  blogpy_network:
+    external: true
