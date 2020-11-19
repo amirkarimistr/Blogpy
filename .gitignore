@@ -12,3 +12,6 @@ blog/migrations
 
 # env files
 .env
+
+# Static Files
+files/
