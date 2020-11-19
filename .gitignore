@@ -19,5 +19,3 @@ files/
 # Location of STATIC FILES related to command python manage.py collectstatic
 static_root/
 
-# static css , javascrips , html files
-static/
