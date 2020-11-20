@@ -4,6 +4,8 @@ from .models import Article
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from . import serializers
+
 
 
 class IndexPage(TemplateView):
@@ -46,3 +48,20 @@ class AllArticleApiView(APIView):
 
         except:
             return Response({'status': 'Internal server error'}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class SingleArticleApiView(APIView):
+
+    def get(self, request, format=None):
+
+        try:
+            article_title = request.GET['article_title']
+            article = Article.objects.filter(title__contains=article_title)
+            serialized_data = serializers.SingleArticleSerializer(article, many=True)
+            data = serialized_data.data
+
+            return Response({'data': data}, status=status.HTTP_200_OK)
+        except:
+            return Response({'status': 'Bad Request '}, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
