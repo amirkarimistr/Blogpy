@@ -5,7 +5,7 @@ from .views import AllArticleApiView as AllArticle
 from .views import SingleArticleApiView as SingleArticle
 from .views import SearchArticleApiView as SearchArticle
 from .views import SubmitArticleApiView as SubmitArticle
-
+from .views import UpdateArticleApiView as UpdateArticle
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('article/', SingleArticle.as_view(), name='single_article'),
     path('article/search/', SearchArticle.as_view(), name='search_article'),
     path('article/submit/', SubmitArticle.as_view(), name='submit_article'),
+    path('article/update-cover/', UpdateArticle.as_view(), name='update_article'),
 ]
