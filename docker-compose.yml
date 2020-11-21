@@ -1,6 +1,24 @@
 version: '3'
 
 services:
+  # The blogpy is our Django project
+  blogpy:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+      - .:/blogpy
+      - blogpy_static_volume:/blogpy/static
+      - blogpy_files_volumes:/blogpy/files
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - blogpy_network
+      - nginx_network
+    depends_on:
+      - blogpy_postgresql
+
   # The below line we define the name of container
   blogpy_postgresql:
     # The below line we define where do we want to get the image for our container
@@ -25,7 +43,13 @@ services:
 volumes:
   blogpy_postgresql:
     external: true
+  blogpy_static_volume:
+    external: true
+  blogpy_files_volumes:
+    external: true
 # Define our networks that we create in above lines
 networks:
   blogpy_network:
+    external: true
+  nginx_network:
     external: true
